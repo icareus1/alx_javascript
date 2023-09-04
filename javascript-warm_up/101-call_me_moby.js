@@ -1,8 +1,8 @@
 //101-call_me_moby.js
 function callMeMoby(x, theFunction){
-    x.forEach(function (item){
-        theFunction(item);
-    })
+    for (let i = 0; i < x; i++) {
+        theFunction();
+    }
 }
 
 module.exports = {
