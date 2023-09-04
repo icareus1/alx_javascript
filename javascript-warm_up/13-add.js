@@ -3,4 +3,6 @@ function add(a, b){
     let sum = a + b
     return sum;
 }
-export const add = add;
+module.exports = {
+    add: add
+};
