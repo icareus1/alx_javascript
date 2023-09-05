@@ -3,6 +3,7 @@
 Create a class that initialize an instance of the same
 class using a constructor (just like __init__ in python)
 and return an empty object if either values are <= 0
+Prints the rectangle using the character X
 */
 
 class Rectangle {
