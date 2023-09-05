@@ -4,6 +4,8 @@ Create a class that initialize an instance of the same
 class using a constructor (just like __init__ in python)
 and return an empty object if either values are <= 0
 Prints the rectangle using the character X
+Exchanges the width and the height of the rectangle
+Multiples the width and the height of the rectangle by 2
 */
 
 class Rectangle {
