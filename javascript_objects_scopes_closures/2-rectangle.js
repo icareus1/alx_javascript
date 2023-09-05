@@ -12,7 +12,9 @@ class Rectangle {
             this.height = h;            
         }
         else {
-            return {};
+            const emptyObject = {};
+            emptyObject.__proto__ = Rectangle.prototype;
+            return emptyObject;
         }
     }
 }
