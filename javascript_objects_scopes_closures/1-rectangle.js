@@ -4,7 +4,6 @@ class using a constructor (just like __init__ in python)
 */
 
 class Rectangle {
-
     constructor(w, h) {
         this.width = w;
         this.height = h;
