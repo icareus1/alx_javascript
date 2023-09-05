@@ -4,7 +4,7 @@ class using a constructor (just like __init__ in python)
 */
 
 class Rectangle {
-  constructor () {
+  constructor() {
     //Empty class
   }
 }
