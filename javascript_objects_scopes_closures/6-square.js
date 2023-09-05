@@ -6,8 +6,12 @@ that prints the rectangle using the character c
 
 const P_Square = require('./5-square.js');
 class Square extends P_Square {
+    
+    constructor(size) {
+        super(size, size);
+    }
 
-    charPrint(c){
+    charPrint(c) {
         if (c === undefined) {
             c = 'X';
         }
