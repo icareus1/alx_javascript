@@ -22,5 +22,5 @@ req.get(url, (error, res, body) => {
 
     const movieData = JSON.parse(body);
 
-    console.log(`Title: ${movieData.title}`);
+    console.log(movieData.title);
 });
