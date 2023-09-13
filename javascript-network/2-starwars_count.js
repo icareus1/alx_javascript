@@ -23,8 +23,17 @@ req.get(url, (error, response, body) => {
     let count = 0;
     for (const film of films) {
         if (film.characters.includes('https://swapi-api.alx-tools.com/api/people/18/')) {
-            count+=1;
+            count++;
         }
     }
-    console.log(count);
+
+
+    films.forEach(film => {
+        film.characters.forEach(character => {
+            if (character === 'https://swapi-api.alx-tools.com/api/people/18/') {
+                film_count.add(film.url);
+            }
+        });
+    });
+    console.log(film_count.size);
 });
