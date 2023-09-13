@@ -27,6 +27,6 @@ request(url, (error, response, body) => {
             console.error(err.message);
             process.exit(1);
         }
-        console.log(`Webpage content successfully saved to ${outputPath}`);
+        console.log(outputPath);
     });
 });
