@@ -3,7 +3,7 @@ const request = require('request');
 const fs = require('fs');
 
 if (process.argv.length !== 4) {
-    console.error('Usage: node fetchAndStore.js <URL> <outputFilePath>');
+    console.error('Usage: node 3-request_store.js <URL> <outputFilePath>');
     process.exit(1);
 }
 
