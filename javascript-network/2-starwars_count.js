@@ -20,14 +20,13 @@ req.get(url, (error, response, body) => {
     }
 
     const films = JSON.parse(body).results;
-    let count = 0;
-    for (const film of films) {
-        if (film.characters.includes('https://swapi-api.alx-tools.com/api/people/18/')) {
-            count++;
-        }
-    }
-
-
+    const film_count = new Set();
+    // let count = 0;
+    // for (const film of films) {
+    //     if (film.characters.includes('https://swapi-api.alx-tools.com/api/people/18/')) {
+    //         count++;
+    //     }
+    // }
     films.forEach(film => {
         film.characters.forEach(character => {
             if (character === 'https://swapi-api.alx-tools.com/api/people/18/') {
