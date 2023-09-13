@@ -27,7 +27,11 @@ req.get(url, (error, response, body) => {
             if (character === 'https://swapi-api.alx-tools.com/api/people/18/') {
                 film_count.add(film.url);
             }
-        });
+        })
     });
     console.log(film_count.size);
+    // const count = films.filter((film) =>
+    //     film.characters.includes('https://swapi-api.alx-tools.com/api/people/18/')
+    // );
+    // console.log(count.length);
 });
