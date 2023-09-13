@@ -23,7 +23,7 @@ req.get(url, (error, response, body) => {
     let count = 0;
     for (const film of films) {
         if (film.characters.includes('https://swapi-api.alx-tools.com/api/people/18/')) {
-            count++;
+            count+=1;
         }
     }
     console.log(count);
