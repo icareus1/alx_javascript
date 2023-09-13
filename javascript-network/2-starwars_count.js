@@ -7,6 +7,7 @@ if (process.argv.length !== 3) {
 }
 
 const url = process.argv[2];
+const charID = '18';
 
 req.get(url, (error, response, body) => {
     if (error) {
@@ -22,7 +23,7 @@ req.get(url, (error, response, body) => {
     const films = JSON.parse(body).results;
     let count = 0;
     for (const film of films) {
-        if (film.characters.includes('https://swapi-api.alx-tools.com/api/people/18/')) {
+        if (film.characters.includes(`https://swapi-api.alx-tools.com/api/people/${charID}/`)) {
             count+=1;
         }
     }
