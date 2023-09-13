@@ -27,6 +27,5 @@ request(url, (error, response, body) => {
             console.error(err.message);
             process.exit(1);
         }
-        console.log(body);
     });
 });
