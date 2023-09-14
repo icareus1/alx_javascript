@@ -1,39 +1,42 @@
 #!usr/bin/node
-const request = require('request');
+const req = require('request');
 
-const url = 'https://jsonplaceholder.typicode.com/todos';
+if (process.argv.length !== 3) {
+    console.error('Usage: node 4-completed_tasks.js <url>');
+    process.exit(1);
+}
 
-request(url, (error, response, body) => {
+const url = process.argv[2];
+
+req.get(url, (error, response, body) => {
     if (error) {
         console.error(error.message);
-        return;
+        process.exit(1);
     }
 
     if (response.statusCode !== 200) {
         console.error(response.statusCode);
-        return;
+        process.exit(1);
     }
+    const tasks = JSON.parse(body);
 
-    const todos = JSON.parse(body);
-    const tasksCompleted = {};
+    // Create a dictionary to store the count of completed tasks for each user
+    const completedTask = {};
 
-    // For each task, check if it's completed and increments the task count for the respective user
-    todos.forEach(todo => {
-        if (todo.completed) {
-            if (tasksCompleted[todo.userId]) {
-                tasksCompleted[todo.userId]++;
-            } else {
-                tasksCompleted[todo.userId] = 1;
-            }
+    // Loop through the tasks and count the completed tasks for each user
+    tasks.forEach(task => {
+      const userId = task.userId;
+      const completed = task.completed;
+
+      if (completed) {
+        if (completedTask[userId]) {
+          completedTask[userId]++;
+        } else {
+          completedTask[userId] = 1;
         }
+      }
     });
 
-    // Removes users with no completed tasks
-    for (const userId in tasksCompleted) {
-        if (tasksCompleted[userId] === 0) {
-            delete tasksCompleted[userId];
-        }
-    }
-
-    console.log(tasksCompleted);
+    // Print the dictionary with completed tasks by user
+    console.log(completedTask);
 });
