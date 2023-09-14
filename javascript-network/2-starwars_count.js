@@ -23,15 +23,15 @@ req.get(url, (error, response, body) => {
     const film_count = new Set();
 
     films.forEach(film => {
-        film.characters.forEach(character => {
-            if (character === 'https://swapi-api.alx-tools.com/api/people/18/') {
+        film.characters.forEach((character) => {
+            if (character.endWith('/18/')) {
                 film_count.add(film.url);
             }
         })
     });
     console.log(film_count.size);
     // const count = films.filter((film) =>
-    //     film.characters.includes('https://swapi-api.alx-tools.com/api/people/18/')
+    //     film.characters.includes.some((character) => character.includes('/18/'));
     // );
     // console.log(count.length);
 });
