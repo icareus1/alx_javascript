@@ -20,18 +20,17 @@ request(url, (error, response, body) => {
     const completedTasksByUser = {};
 
     // Iterate through the todos and count completed tasks for each user
-    todos.forEach((todo) => {
+      todos.forEach((todo) => {
+        const userId = todo.userId.toString(); // Convert userId to string
         if (todo.completed) {
-            if (completedTasksByUser[todo.userId]) {
-                completedTasksByUser[todo.userId]++;
+            if (completedTasksByUser[userId]) {
+                completedTasksByUser[userId]++;
             } else {
-                completedTasksByUser[todo.userId] = 1;
+                completedTasksByUser[userId] = 1;
             }
         }
     });
 
-    // Print the number of completed tasks for each user
-    for (const userId in completedTasksByUser) {
-        console.log(`${userId}: ${completedTasksByUser[userId]}`);
-    }
+    // Print the result as a JSON object
+    console.log(JSON.stringify(completedTasksByUser));
 });
