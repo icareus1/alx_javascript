@@ -21,7 +21,7 @@ req.get(url, (error, response, body) => {
 
     const films = JSON.parse(body).results;
     const count = films.filter((film) =>
-        film.characters.includes.some((character) => character.includes('/18/'))
+        film.characters.some((character) => character.includes('/18/'))
     );
     console.log(count.length);
 });
