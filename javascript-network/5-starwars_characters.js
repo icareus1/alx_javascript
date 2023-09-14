@@ -12,7 +12,7 @@ const movieId = process.argv[2];
 // Create the API URL by concatenating the movie ID with the API base URL
 const url = `https://swapi.dev/api/films/${movieId}/`;
 
-request(url, (error, response, body) => {
+req.get(url, (error, response, body) => {
     if (error) {
         console.error(error.message);
         process.exit(1);
