@@ -17,6 +17,7 @@ request(url, (error, response, body) => {
     const todos = JSON.parse(body);
     const tasksCompleted = {};
 
+    // For each task, check if it's completed and increments the task count for the respective user
     todos.forEach(todo => {
         if (todo.completed) {
             if (tasksCompleted[todo.userId]) {
@@ -27,7 +28,12 @@ request(url, (error, response, body) => {
         }
     });
 
+    // Removes users with no completed tasks
     for (const userId in tasksCompleted) {
-        console.log(`${userId}: ${tasksCompleted[userId]}`);
+        if (tasksCompleted[userId] === 0) {
+            delete tasksCompleted[userId];
+        }
     }
+
+    console.log(tasksCompleted);
 });
