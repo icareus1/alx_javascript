@@ -1,0 +1,1 @@
+Storage manipulation in JS
