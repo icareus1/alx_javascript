@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Shopping Cart</title>
+  </head>
+  <body>
+    <h1>Shopping Cart</h1>
+
+    <h2 id="available-products">Available Products:</h2>
+    <ul id="available-items"></ul>
+
+    <h2 id="cart">Your Cart:</h2>
+    <div id="cart-items"></div>
+
+    <script>
+      // Create an array of available items.
+      const availableItems = ["Shampoo", "Soap", "Sponge", "Water"];
+
+      // Check if session storage is available.
+      if (!window.sessionStorage) {
+        alert(
+          "Sorry, your browser does not support Web storage. Try again with a better one"
+        );
+      }
+
+      // Create the getCartFromStorage function.
+      function getCartFromStorage() {
+        const cart = window.sessionStorage.getItem("cart");
+        if (cart === null) {
+          return {};
+        }
+
+        return JSON.parse(cart);
+      }
+
+      // Create the addItemToCart function.
+      function addItemToCart(item) {
+        const cart = getCartFromStorage();
+
+        if (cart[item] === undefined) {
+          cart[item] = { quantity: 1 };
+        } else {
+          cart[item].quantity++;
+        }
+
+        window.sessionStorage.setItem("cart", JSON.stringify(cart));
+        displayCart();
+      }
+
+      // Create the createStore function.
+      function createStore() {
+        const availableItemsList = document.getElementById("available-items");
+
+        // Loop through the array of items.
+        for (const item of availableItems) {
+          // Create a list item element.
+          const li = document.createElement("li");
+
+          // Create an anchor tag element.
+          const a = document.createElement("a");
+          a.textContent = item;
+
+          // Set the href attribute of the anchor tag to the item name.
+          a.href = "#";
+
+          // Add an onclick event listener to the anchor tag that calls the addItemToCart function.
+          a.addEventListener("click", () => addItemToCart(item));
+
+          // Append the anchor tag to the list item element.
+          li.appendChild(a);
+
+          // Append the list item element to the ul element.
+          availableItemsList.appendChild(li);
+        }
+      }
+
+      // Create the displayCart function.
+      function displayCart() {
+        const cartItemsDiv = document.getElementById("cart-items");
+        cartItemsDiv.innerHTML = "";
+
+        const cart = getCartFromStorage();
+
+        if (Object.keys(cart).length === 0) {
+          const emptyCartListItem = document.createElement("li");
+          emptyCartListItem.textContent = "Your cart is empty";
+
+          cartItemsDiv.appendChild(emptyCartListItem);
+          return;
+        }
+
+        // Add a button to clear the cart.
+        const clearCartButton = document.createElement("button");
+        clearCartButton.textContent = "Clear my cart";
+
+        clearCartButton.addEventListener("click", () => clearCart());
+
+        cartItemsDiv.appendChild(clearCartButton);
+
+        // Add a list of items in the cart.
+        const cartList = document.createElement("ul");
+
+        for (const item of Object.keys(cart)) {
+          const cartListItem = document.createElement("li");
+          cartListItem.textContent = `${item} x ${cart[item].quantity} `;
+
+          const removeLink = document.createElement("a");
+          removeLink.textContent = "(remove)";
+          removeLink.href = "#";
+
+          removeLink.addEventListener("click", () => removeItemFromCart(item));
+
+          cartListItem.appendChild(removeLink);
+
+          cartList.appendChild(cartListItem);
+        }
+
+        cartItemsDiv.appendChild(cartList);
+      }
+
+      // Create the updateItemQuantity function.
+      function updateItemQuantity(item, quantity) {
+        const cart = getCartFromStorage();
+
+        cart[item].quantity = quantity;
+
+        window.sessionStorage.setItem("cart", JSON.stringify(cart));
+        displayCart();
+      }
+// Create the removeItemFromCart function.
+      function removeItemFromCart(item) {
+        const cart = getCartFromStorage();
+
+        delete cart[item];
+
+        window.sessionStorage.setItem("cart", JSON.stringify(cart));
+        displayCart();
+      }
+
+      // Create the clearCart function.
+      function clearCart() {
+        window.sessionStorage.clear();
+        displayCart();
+      }
+      // Update the cart display on load.
+      window.addEventListener("DOMContentLoaded", () => {
+        createStore();
+        displayCart();
+        console.log("test");
+      });
+    </script>
+  </body>
+</html>
